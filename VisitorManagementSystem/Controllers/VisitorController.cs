@@ -52,10 +52,9 @@ namespace VisitorManagementSystem.Controllers
             if (photoFile != null && photoFile.ContentLength > 0)
             {
                 string fileName = Path.GetFileName(photoFile.FileName);
-                string uniqueName = Guid.NewGuid().ToString() + Path.GetExtension(fileName); // ✅ Unique filename
+                string uniqueName = Guid.NewGuid().ToString() + Path.GetExtension(fileName);
                 string path = Path.Combine(Server.MapPath("~/Uploads/"), uniqueName);
 
-                // Ensure Uploads folder exists
                 if (!Directory.Exists(Server.MapPath("~/Uploads/")))
                 {
                     Directory.CreateDirectory(Server.MapPath("~/Uploads/"));
@@ -82,7 +81,7 @@ namespace VisitorManagementSystem.Controllers
                 cmd.Parameters.AddWithValue("@ContactNumber", visitor.ContactNumber);
                 cmd.Parameters.AddWithValue("@VisitDate", visitor.VisitDate);
                 cmd.Parameters.AddWithValue("@Purpose", visitor.Purpose);
-                cmd.Parameters.AddWithValue("@PhotoPath", visitor.PhotoPath ?? (object)DBNull.Value); // ✅ Safe
+                cmd.Parameters.AddWithValue("@PhotoPath", visitor.PhotoPath ?? (object)DBNull.Value);
 
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -90,9 +89,6 @@ namespace VisitorManagementSystem.Controllers
 
             return RedirectToAction("Index");
         }
-
-
-
         public ActionResult Delete(int id)
         {
             using (SqlConnection con = new SqlConnection(cs))
@@ -134,7 +130,6 @@ namespace VisitorManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                // 1. Fetch existing visitor to retain original photo if no new one is uploaded
                 Visitor existingVisitor = null;
                 using (SqlConnection conn = new SqlConnection(cs))
                 {
@@ -153,7 +148,6 @@ namespace VisitorManagementSystem.Controllers
                     conn.Close();
                 }
 
-                // 2. If a new photo is uploaded, update it. Else retain the existing.
                 if (photoFile != null && photoFile.ContentLength > 0)
                 {
                     string fileName = Path.GetFileName(photoFile.FileName);
@@ -165,10 +159,9 @@ namespace VisitorManagementSystem.Controllers
                 }
                 else
                 {
-                    visitor.PhotoPath = existingVisitor?.PhotoPath; // Retain old photo
+                    visitor.PhotoPath = existingVisitor?.PhotoPath;
                 }
 
-                // 3. Update DB
                 using (SqlConnection conn = new SqlConnection(cs))
                 {
                     string query = @"UPDATE Visitors 

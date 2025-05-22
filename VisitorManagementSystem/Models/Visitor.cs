@@ -32,7 +32,6 @@ namespace VisitorManagementSystem.Models
 
         public string PhotoPath { get; set; }
 
-        // ✅ Custom validator for VisitDate
         public class CustomDateValidationAttribute : ValidationAttribute
         {
             public override bool IsValid(object value)
