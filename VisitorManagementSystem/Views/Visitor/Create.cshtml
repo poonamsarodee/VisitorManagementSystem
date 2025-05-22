@@ -1,0 +1,58 @@
+﻿@model VisitorManagementSystem.Models.Visitor
+@{
+    ViewBag.Title = "Add Visitor";
+}
+<div class="container mt-5">
+    <div class="card p-4">
+        <h2 class="text-center text-success"><i class="fas fa-user-plus me-2"></i> Add Visitor</h2>
+        @using (Html.BeginForm("Create", "Visitor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new {@class = "text-danger" })
+
+            <div class="border rounded p-4 bg-white shadow">
+                <div class="form-group mb-3">
+                    @Html.LabelFor(m => m.FullName)
+                    @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(m => m.Email)
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(m => m.ContactNumber)
+                    @Html.TextBoxFor(m => m.ContactNumber, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ContactNumber, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(m => m.VisitDate)
+                    @Html.TextBoxFor(m => m.VisitDate, new { @type = "date", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.VisitDate, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(m => m.Purpose)
+                    @Html.TextBoxFor(m => m.Purpose, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Purpose, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>Upload Photo</label>
+                    <input type="file" name="photoFile" class="form-control" />
+                    @*@if (!string.IsNullOrEmpty(Model.Photo))
+                    {
+                        <img src="@Url.Content(Model.Photo)" height="100" class="mt-2" />
+                    }*@
+                </div>
+
+                <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i>Submit</button>
+                <a href="@Url.Action("Index")" class="btn btn-secondary">Back</a>
+            </div>
+         }
+    </div>
+</div>

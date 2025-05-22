@@ -1,0 +1,40 @@
+﻿@model VisitorManagementSystem.Models.Visitor
+
+@{
+    ViewBag.Title = "Visitor Details";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-info text-white text-center">
+            <h4><i class="fas fa-id-badge"></i> Visitor Information</h4>
+        </div>
+        <div class="card-body p-4">
+            <div class="text-center mb-4">
+                <img src="@Url.Content(Model.PhotoPath)" alt="Visitor Photo" width="120" height="120" class="rounded-circle shadow border border-3 border-secondary" />
+            </div>
+
+            <dl class="row fs-5">
+                <dt class="col-sm-3">Full Name:</dt>
+                <dd class="col-sm-9">@Model.FullName</dd>
+
+                <dt class="col-sm-3">Email:</dt>
+                <dd class="col-sm-9"><span class="badge bg-success">@Model.Email</span></dd>
+
+                <dt class="col-sm-3">Contact:</dt>
+                <dd class="col-sm-9"><span class="badge bg-primary">@Model.ContactNumber</span></dd>
+
+                <dt class="col-sm-3">Visit Date:</dt>
+                <dd class="col-sm-9">@Model.VisitDate.ToString("dd MMM yyyy")</dd>
+
+                <dt class="col-sm-3">Purpose:</dt>
+                <dd class="col-sm-9">@Model.Purpose</dd>
+            </dl>
+        </div>
+        <div class="card-footer text-center">
+            <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+        </div>
+    </div>
+</div>

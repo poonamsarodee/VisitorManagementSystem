@@ -1,0 +1,42 @@
+﻿@model VisitorManagementSystem.Models.Visitor
+@{
+    ViewBag.Title = "Edit Visitor";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center text-warning"><i class="fas fa-edit"></i>Edit Visitor Details</h2>
+
+    @using (Html.BeginForm("Edit", "Visitor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Id)
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(m => m.FullName)
+            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(m => m.ContactNumber)
+            @Html.TextBoxFor(m => m.ContactNumber, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(m => m.VisitDate)
+            @Html.TextBoxFor(m => m.VisitDate, new { type = "date", @class = "form-control" })
+        </div>
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(m => m.Purpose)
+            @Html.TextBoxFor(m => m.Purpose, new { @class = "form-control" })
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Back</a>
+    }
+</div>
